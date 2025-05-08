@@ -27,7 +27,10 @@ set(COMPONENT_AMENT_DEPENDENCIES
 add_library(${PROJECT_NAME} SHARED src/adaptive_component.cpp)
 target_compile_definitions(${PROJECT_NAME}
   PRIVATE "COMPOSITION_BUILDING_DLL")
-target_link_libraries(${PROJECT_NAME} PUBLIC ${COMPONENT_AMENT_DEPENDENCIES})
+target_link_libraries(${PROJECT_NAME} PUBLIC
+  rclcpp::rclcpp
+  rclcpp_components::component
+  rclcpp_components::component_manager)
 rclcpp_components_register_nodes(${PROJECT_NAME} "composition::AdaptiveComponent")
 set(node_plugins "${node_plugins}composition::AdaptiveComponent;$<TARGET_FILE:adaptive_component>\n")
 
